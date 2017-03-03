@@ -1,3 +1,14 @@
 {
-  "presets": ["react-native"]
+  "presets": ["stage-3", "react-native"],
+  "plugins": [
+    ["module-resolver", {
+      "alias": {
+        "config": "./src/config",
+        "actions": "./src/state/actions",
+        "reducers": "./src/state/reducers",
+        "utils": "./src/utils",
+        "tests": "./tests",
+      }
+    }]
+  ]
 }

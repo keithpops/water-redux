@@ -2,6 +2,10 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
+  entry: [
+    'babel-polyfill',
+    './src/index.js'
+  ],
   output: {
     library: 'WaterRedux',
     libraryTarget: 'umd'
@@ -13,7 +17,7 @@ module.exports = {
         test: /\.js$/,
         use: ['babel-loader'],
         exclude: /node_modules/,
-        include: /src/
+        include: [/src/, /tests/]
       }
     ]
   },

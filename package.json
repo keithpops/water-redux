@@ -39,6 +39,8 @@
     "webpack": "^2.2.0"
   },
   "dependencies": {
+    "axios": "^0.15.3",
+    "query-string": "^4.3.2",
     "redux-promise-middleware": "^4.2.0",
     "redux-thunk": "^2.2.0"
   }

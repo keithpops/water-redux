@@ -1,6 +1,6 @@
 import reduxCrud from 'redux-crud';
 import groupBy from 'lodash.groupby';
-import { request } from 'utils';
+import { generateUUID, request } from 'utils';
 
 const {
   createStart,
@@ -17,7 +17,9 @@ const {
 const createSiteQuery = (_sites, params={}) => {
   return (dispatch) => {
     const sites = _sites.toString();
-    dispatch(createStart({ id: sites }));
+    const _id = generateUUID;
+
+    dispatch(createStart({ id: _id }));
 
     sites.split(',').forEach(id => dispatch(createSiteStart({ id })));
 
@@ -34,7 +36,7 @@ const createSiteQuery = (_sites, params={}) => {
           dispatch(createSiteError(e, { id: key }));
         }
       });
-      return dispatch(createSuccess({ id: sites, ...response.queryInfo }));
+      return dispatch(createSuccess({ id: _id, ...response.timeSeries }));
     }).catch(err => dispatch(createError(err.message, { id: sites }, err.response.statusText)));
   };
 }

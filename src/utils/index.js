@@ -1,5 +1,7 @@
 import request from './request';
+import generateUUID from './generateUUID';
 
 export {
-  request, 
+  generateUUID,
+  request,
 };

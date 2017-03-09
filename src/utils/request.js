@@ -36,12 +36,12 @@ const handleResponse = (response) => {
   }
 }
 
-export default async (method, query={}, body) => {
+export default async (method, query={}) => {
   const path = queryString.stringify(_.merge(DEFAULT_QUERY, query));
 
   try {
     return await axios.get(`?${path}`).then(handleResponse);
   } catch(e) {
-    throw new Error(e);
+    throw e;
   }
 }

@@ -24,10 +24,12 @@ const createSiteQuery = (_sites, params={}) => {
     const query = { sites, ...params};
     return request('GET', query).then(response => {
       const groups = groupBy(response.timeSeries, time => time.sourceInfo.siteCode[0].value);
+
+      // create sites
       Object.keys(groups).forEach((key) => {
         try {
-          const firstSeriesInGroup = groups[key][0];
-          dispatch(createSiteSuccess(({ id: key, ...firstSeriesInGroup.sourceInfo })));
+          const timeSeries = groups[key];
+          dispatch(createSiteSuccess(({ id: key, ...timeSeries[0].sourceInfo, timeSeries })));
         } catch (e) {
           dispatch(createSiteError(e, { id: key }));
         }

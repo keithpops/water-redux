@@ -14,12 +14,19 @@ const {
   createError: createSiteError,
 } = reduxCrud.actionCreatorsFor('site');
 
+const {
+  createStart: createLogStart,
+  createSuccess: createLogSuccess,
+  createError: createLogError,
+} = reduxCrud.actionCreatorsFor('log');
+
 const createSiteQuery = (_sites, params={}) => {
   return (dispatch) => {
     const sites = _sites.toString();
     const _id = generateUUID;
 
     dispatch(createStart({ id: _id }));
+    dispatch(createLogStart({ id: _id }));
 
     sites.split(',').forEach(id => dispatch(createSiteStart({ id })));
 
@@ -36,6 +43,14 @@ const createSiteQuery = (_sites, params={}) => {
           dispatch(createSiteError(e, { id: key }));
         }
       });
+
+      // create log
+      try {
+        dispatch(createLogSuccess({ id: _id, ...response.queryInfo }))
+      } catch (e) {
+        dispatch(createLogError(e, { id: _id }));
+      }
+      
       return dispatch(createSuccess({ id: _id, ...response.timeSeries }));
     }).catch(err => dispatch(createError(err.message, { id: sites }, err.response.statusText)));
   };

@@ -54,6 +54,11 @@ describe('actions/siteQueryActions', () => {
         expect(action).to.exist.and.have.property('record');
       });
 
+      it('should have LOG_CREATE_SUCCESS action', () => {
+        action = _.find(actions, { type: 'LOG_CREATE_SUCCESS' });
+        expect(action).to.exist.and.have.property('record');
+      });
+
       it('should have SITE_QUERY_CREATE_SUCCESS action', () => {
         action = _.find(actions, { type: 'SITE_QUERY_CREATE_SUCCESS' });
         expect(action).to.exist.and.have.property('record');

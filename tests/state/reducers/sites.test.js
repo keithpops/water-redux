@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import reduxCrud from 'redux-crud';
 import reducer from 'reducers/sites';
+import { constants } from 'utils';
 
 const { SITE_CREATE_SUCCESS } = reduxCrud.actionTypesFor('site');
 const initialState = [];
@@ -13,7 +14,7 @@ describe('reducers/sites', () => {
   it('handles the SITE_CREATE_SUCCESS action', () => {
     const record = { id: 50231500, name: 'LAGUNA BAHIA MOSQUITO NO.1 VIEQUES PR' }
     const reduced = reducer(initialState, {
-      type: SITE_CREATE_SUCCESS,
+      type: `${constants.ACTION_TYPE_PREFIX}${SITE_CREATE_SUCCESS}`,
       record,
     });
     expect(reduced).to.include(record);

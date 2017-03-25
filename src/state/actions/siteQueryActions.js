@@ -1,24 +1,30 @@
 import reduxCrud from 'redux-crud';
 import groupBy from 'lodash.groupby';
-import { generateUUID, request } from 'utils';
+import {
+  generateUUID,
+  constants,
+  request,
+} from 'utils';
+
+const __acf = (string) => `${constants.REDUX_CRUD_PREFIX}${string}`
 
 const {
   createStart,
   createSuccess,
   createError,
-} = reduxCrud.actionCreatorsFor('site_query');
+} = reduxCrud.actionCreatorsFor(__acf('site_query'));
 
 const {
   createStart: createSiteStart,
   createSuccess: createSiteSuccess,
   createError: createSiteError,
-} = reduxCrud.actionCreatorsFor('site');
+} = reduxCrud.actionCreatorsFor(__acf('site'));
 
 const {
   createStart: createLogStart,
   createSuccess: createLogSuccess,
   createError: createLogError,
-} = reduxCrud.actionCreatorsFor('log');
+} = reduxCrud.actionCreatorsFor(__acf('log'));
 
 const createSiteQuery = (_sites, params={}) => {
   return (dispatch) => {

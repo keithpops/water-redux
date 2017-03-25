@@ -1,6 +1,7 @@
 import reduxCrud from 'redux-crud';
+import { constants } from 'utils';
 
-const baseReducers = reduxCrud.List.reducersFor('log');
+const baseReducers = reduxCrud.List.reducersFor(`${constants.REDUX_CRUD_PREFIX}log`);
 
 const initialState = [];
 

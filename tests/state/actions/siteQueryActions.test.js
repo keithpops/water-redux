@@ -3,9 +3,12 @@ import _ from 'lodash';
 import configureStore from 'redux-mock-store';
 import { createSiteQuery } from 'actions/siteQueryActions';
 import reduxMiddleware from 'config/middleware';
+import { constants } from 'utils';
 import { SITES } from '../../helpers/constants';
 
 const mockStore = configureStore(reduxMiddleware);
+
+const __type = (string) => `${constants.ACTION_TYPE_PREFIX}${string}`;
 
 describe('actions/siteQueryActions', () => {
   let store, action, actions;
@@ -22,7 +25,7 @@ describe('actions/siteQueryActions', () => {
       it('should call at least 2 actions', () => expect(actions).to.have.length.of.at.least(2));
 
       it('should have SITE_QUERY_CREATE_SUCCESS action', () => {
-        action = _.find(actions, { type: 'SITE_QUERY_CREATE_SUCCESS' });
+        action = _.find(actions, { type: __type('SITE_QUERY_CREATE_SUCCESS') });
         expect(action).to.exist.and.have.property('record');
       });
     });
@@ -36,7 +39,7 @@ describe('actions/siteQueryActions', () => {
       });
 
       it('should be able to throw an error', () => {
-        action = _.find(actions, { type: 'SITE_QUERY_CREATE_ERROR' });
+        action = _.find(actions, { type: __type('SITE_QUERY_CREATE_ERROR') });
         expect(action).to.exist.and.have.property('error');
       });
     });
@@ -50,17 +53,17 @@ describe('actions/siteQueryActions', () => {
       });
 
       it('should have SITE_CREATE_SUCCESS action', () => {
-        action = _.find(actions, { type: 'SITE_CREATE_SUCCESS' });
+        action = _.find(actions, { type: __type('SITE_CREATE_SUCCESS') });
         expect(action).to.exist.and.have.property('record');
       });
 
       it('should have LOG_CREATE_SUCCESS action', () => {
-        action = _.find(actions, { type: 'LOG_CREATE_SUCCESS' });
+        action = _.find(actions, { type: __type('LOG_CREATE_SUCCESS') });
         expect(action).to.exist.and.have.property('record');
       });
 
       it('should have SITE_QUERY_CREATE_SUCCESS action', () => {
-        action = _.find(actions, { type: 'SITE_QUERY_CREATE_SUCCESS' });
+        action = _.find(actions, { type: __type('SITE_QUERY_CREATE_SUCCESS') });
         expect(action).to.exist.and.have.property('record');
       });
     });

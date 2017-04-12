@@ -1,3 +1,4 @@
+/* @flow */
 import reduxCrud from 'redux-crud';
 import groupBy from 'lodash.groupby';
 import {
@@ -26,8 +27,8 @@ const {
   createError: createLogError,
 } = reduxCrud.actionCreatorsFor(__acf('log'));
 
-const createSiteQuery = (_sites, params={}) => {
-  return (dispatch) => {
+const createSiteQuery = (_sites: string|number|Array<string|number>, params?: {} = {}) => {
+  return (dispatch: () => {}) => {
     const sites = _sites.toString();
     const _id = generateUUID;
 
@@ -56,7 +57,7 @@ const createSiteQuery = (_sites, params={}) => {
       } catch (e) {
         dispatch(createLogError(e, { id: _id }));
       }
-      
+
       return dispatch(createSuccess({ id: _id, ...response.timeSeries }));
     }).catch(err => dispatch(createError(err.message, { id: sites }, err.response.statusText)));
   };
